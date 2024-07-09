@@ -20,6 +20,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'id_role'
     ];
 
     /**
@@ -43,5 +44,10 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+    public function role()
+    {
+        // Jika nama fieldnya beda maka pakai ini  return $this->hasMany(User::class, 'id_role');
+        return $this->belongsTo(RoleModel::class);
     }
 }

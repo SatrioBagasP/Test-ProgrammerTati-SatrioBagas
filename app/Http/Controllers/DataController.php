@@ -397,7 +397,7 @@ class DataController extends Controller
 
         $post = $request->all();
 
-        // Mengamil data berdasarkan id yang dikirim
+        // Mengambil data berdasarkan id yang dikirim
         $data = ProvinsiModel::where('id',$id)->first();
 
         // Melakukan perubahan dalam validasi jika code yang dikirim itu code yang sama dengan sebelumnya, hanya mengganti nama saja
