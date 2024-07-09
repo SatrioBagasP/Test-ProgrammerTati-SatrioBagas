@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,6 +10,10 @@
     {{-- Sweet Alert --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
+
+    {{-- Trix Editor --}}
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.8/dist/trix.css">
+  <script type="text/javascript" src="https://unpkg.com/trix@2.0.8/dist/trix.umd.min.js"></script>
 
     {{-- Toaster --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
@@ -27,6 +30,10 @@
         .h {
             height: max-content;
         }
+        trix-toolbar [data-trix-button-group='file-tools'] {
+            display: none;
+        }
+    </style>
     </style>
 </head>
 
@@ -51,9 +58,9 @@
 
             <ul class="space-y-2 font-medium">
                     <li>
-                        <a href="/home"
+                        <a href="/"
                             class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100
-                            {{ request()->is('home') ? 'bg-gray-200 dark:bg-gray-700' : '' }} dark:hover:bg-gray-700 group">
+                            {{ request()->is('/*') ? 'bg-gray-200 dark:bg-gray-700' : '' }} dark:hover:bg-gray-700 group">
                             <svg class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                                 viewBox="0 0 22 21">
@@ -69,7 +76,7 @@
                     @can('StaffDivisi')
                     <li>
                         <a href="/logharian"
-                            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group  {{ request()->is('riwayat') ? 'bg-gray-200 dark:bg-gray-700' : '' }}">
+                            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group  {{ request()->is('logharian*') ? 'bg-gray-200 dark:bg-gray-700' : '' }}">
                             <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

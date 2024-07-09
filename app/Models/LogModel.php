@@ -10,10 +10,21 @@ class LogModel extends Model
     use HasFactory;
     protected $table = 'logharian';
     protected $fillable = [
-        'id_user',
+        'user_id',
         'judul',
         'desc',
         'isAccBidang',
         'isAccDinas',
     ];
+  // Relasi dengan logharian melalui isAccDinas
+  public function statusdinas()
+  {
+      return $this->belongsTo(StatusModel::class, 'isAccDinas');
+  }
+
+  // Relasi dengan logharian melalui isAccBidang
+  public function statusbidang()
+  {
+      return $this->belongsTo(StatusModel::class, 'isAccBidang');
+  }
 }

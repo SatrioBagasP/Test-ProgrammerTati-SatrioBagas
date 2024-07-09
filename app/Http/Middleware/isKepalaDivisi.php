@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Auth;
 
 class isKepalaDivisi
 {
@@ -15,11 +16,11 @@ class isKepalaDivisi
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (auth()->guest()) {
+        if (Auth::guest()) {
             abort(403);
         }
 
-        if (!in_array(auth()->user()->role, [3, 4, 5])) {
+        if (!in_array(Auth::user()->role_id, [4, 5, 6])) {
             abort(403);
         }
         return $next($request);

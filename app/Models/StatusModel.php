@@ -12,4 +12,16 @@ class StatusModel extends Model
     protected $fillable = [
         'status',
     ];
+
+     // Relasi dengan logharian melalui isAccDinas
+     public function statusdinas()
+     {
+         return $this->hasMany(LogModel::class, 'isAccDinas');
+     }
+
+     // Relasi dengan logharian melalui isAccBidang
+     public function statusbidang()
+     {
+         return $this->hasMany(LogModel::class, 'isAccBidang');
+     }
 }

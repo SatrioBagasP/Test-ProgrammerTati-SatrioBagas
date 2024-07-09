@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
 
-class isKepalaDinas
+class isStaf
 {
     /**
      * Handle an incoming request.
@@ -16,12 +16,11 @@ class isKepalaDinas
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $response = $next($request);
         if (Auth::guest()) {
             abort(403);
         }
 
-        if (Auth::user()->role_id != 7) {
+        if (!in_array(Auth::user()->role_id, [1, 2, 3])) {
             abort(403);
         }
         return $next($request);
