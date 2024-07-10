@@ -20,7 +20,7 @@ class isKepalaDivisi
             abort(403);
         }
 
-        if (!in_array(Auth::user()->role_id, [4, 5, 6])) {
+        if (Auth::user()->role_id != 2) {
             abort(403);
         }
         return $next($request);

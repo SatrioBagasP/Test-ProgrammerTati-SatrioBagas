@@ -50,4 +50,12 @@ class User extends Authenticatable
         // Jika nama fieldnya beda maka pakai ini  return $this->hasMany(User::class, 'id_role');
         return $this->belongsTo(RoleModel::class);
     }
+    public function divisi()
+    {
+        return $this->belongsTo(DivisiModel::class);
+    }
+    public function logharian()
+    {
+        return $this->hasMany(LogModel::class);
+    }
 }

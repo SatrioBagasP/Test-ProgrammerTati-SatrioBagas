@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\DivisiModel;
 use App\Models\LogModel;
 use App\Models\RoleModel;
 use App\Models\StatusModel;
@@ -21,25 +22,27 @@ class DatabaseSeeder extends Seeder
 
         // Membuat database role
         RoleModel::create([
-            'role'=>'Staff Devisi 1'
+            'role' => 'Staff'
         ]);
         RoleModel::create([
-            'role'=>'Staff Devisi 2'
+            'role' => 'Kepala Devisi'
         ]);
         RoleModel::create([
-            'role'=>'Staff Devisi 3'
+            'role' => 'Ketua Dinas'
         ]);
-        RoleModel::create([
-            'role'=>'Kepala Bidang Devisi 1'
+
+        // Membuat database divisi
+        DivisiModel::create([
+            'divisi' => 'Divisi 1',
         ]);
-        RoleModel::create([
-            'role'=>'Kepala Bidang Devisi 2'
+        DivisiModel::create([
+            'divisi' => 'Divisi 2',
         ]);
-        RoleModel::create([
-            'role'=>'Kepala Bidang Devisi 3'
+        DivisiModel::create([
+            'divisi' => 'Divisi 3',
         ]);
-        RoleModel::create([
-            'role'=>'Kepala Dinas'
+        DivisiModel::create([
+            'divisi' => 'Kepala Dinas',
         ]);
 
 
@@ -58,17 +61,26 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'Staff Devisi 1',
             'email' => 'staff1@gmail.com',
-            'role_id' => 1
+            'role_id' => 1,
+            'divisi_id' => 1
         ]);
         User::factory()->create([
             'name' => 'Kepala Devisi 1',
             'email' => 'kepala1@gmail.com',
-            'role_id' => 4
+            'role_id' => 2,
+            'divisi_id' => 1
+        ]);
+        User::factory()->create([
+            'name' => 'Kepala Devisi 2',
+            'email' => 'kepala2@gmail.com',
+            'role_id' => 2,
+            'divisi_id' => 2
         ]);
         User::factory()->create([
             'name' => 'Kepala Dinas',
             'email' => 'dinas@gmail.com',
-            'role_id' => 7
+            'role_id' => 3,
+            'divisi_id' => 4,
         ]);
 
         // Membuat test log

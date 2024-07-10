@@ -16,15 +16,19 @@ class LogModel extends Model
         'isAccBidang',
         'isAccDinas',
     ];
-  // Relasi dengan logharian melalui isAccDinas
-  public function statusdinas()
-  {
-      return $this->belongsTo(StatusModel::class, 'isAccDinas');
-  }
+    // Relasi dengan logharian melalui isAccDinas
+    public function statusdinas()
+    {
+        return $this->belongsTo(StatusModel::class, 'isAccDinas');
+    }
 
-  // Relasi dengan logharian melalui isAccBidang
-  public function statusbidang()
-  {
-      return $this->belongsTo(StatusModel::class, 'isAccBidang');
-  }
+    // Relasi dengan logharian melalui isAccBidang
+    public function statusbidang()
+    {
+        return $this->belongsTo(StatusModel::class, 'isAccBidang');
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

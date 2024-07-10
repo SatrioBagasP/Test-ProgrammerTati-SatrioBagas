@@ -20,7 +20,7 @@ class isStaf
             abort(403);
         }
 
-        if (!in_array(Auth::user()->role_id, [1, 2, 3])) {
+        if (Auth::user()->role_id != 1) {
             abort(403);
         }
         return $next($request);

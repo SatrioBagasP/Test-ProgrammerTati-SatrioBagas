@@ -21,7 +21,7 @@ class isKepalaDinas
             abort(403);
         }
 
-        if (Auth::user()->role_id != 7) {
+        if (Auth::user()->role_id != 3) {
             abort(403);
         }
         return $next($request);
