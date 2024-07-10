@@ -33,7 +33,14 @@ class PredikatController extends Controller
                 $hasil = $nilai[$hasil];
             }
         }
-
+        if($hasil != null)
+        {
+            $hasil;
+        }
+        else
+        {
+            $hasil = '';
+        }
         return view('predikat',[
             'hasil' => $hasil,
         ]);

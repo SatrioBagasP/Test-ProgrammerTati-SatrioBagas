@@ -19,9 +19,6 @@ Route::get('/logharian/{id?}', [MainController::class, 'log_harian'])->middlewar
 Route::post('/updatelog/{id?}', [MainController::class, 'update_log'])->middleware('LogOwnership');
 Route::get('/createlog', [MainController::class, 'log'])->middleware('staf');
 Route::post('/store_log', [MainController::class, 'store_log'])->middleware('staf');
-
-
-// Soal Nomor 2
 Route::post('/login', [LoginController::class, 'index']);
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/logout', [LoginController::class, 'logout']);
