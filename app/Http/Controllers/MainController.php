@@ -71,17 +71,20 @@ class MainController extends Controller
     }
     public function update_log($id, Request $request)
     {
-        $post = $request->all();
-
+       // Mengambil data logharia yang mau dirubah berdasarkan id
         $data = LogModel::find($id);
 
         // Mengecek apakah yang dikirm itu acc bidang atau dinas
         if ($request->isAccBidang) {
+            // Jika Accbidang maka yang dirubah adalah status acc bidang
             $set_data['isAccBidang'] = $request['isAccBidang'];
         }
         if ($request->isAccDinas) {
+            // Jika accdinas maka yang dirubah adalah status acc dinas
             $set_data['isAccDinas'] = $request['isAccDinas'];
         }
+
+        // Lakukan update berdasarkan pengecekan tadi
         $data->update($set_data);
         return redirect('/logharian')->with('datachange', 'Data Log Telah Dirubah');
     }

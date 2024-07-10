@@ -28,25 +28,25 @@ class AppServiceProvider extends ServiceProvider
 
         // Agar variable notif dibawa ke semua view,
         View::composer('*', function ($view) {
+
+            // Mengecek apakah yang login kepala bidang atau dinas
             if (Auth::check() && Auth::user()->role_id == 2) {
+                // Jika kepala bidang maka perlu query untuk ke user agar mengecek perdivisinya
                 $notif = LogModel::whereHas('user', function ($query) {
                     $query->where('divisi_id', Auth::user()->divisi_id);
                 })
+
+                // Lalu query dimana status adalah 1 / Pending
                     ->where('isAccBidang', 1)
                     ->count();
 
+                // Lalu  dilempar ke view untuk memunculkan notif
                 $view->with('notif', $notif);
             }
-        });
-
-        View::composer('*', function ($view) {
             if (Auth::check() && Auth::user()->role_id == 3) {
-                $notif = LogModel::whereHas('user', function ($query) {
-                    $query->where('divisi_id', Auth::user()->divisi_id);
-                })
-                    ->where('isAccDinas', 1)
-                    ->count();
-
+                // Jika kepala dinas maka langsung saja tidak perlu query untuk mengecek divisi karena kepala dinas perlu mengacc semua divisi
+                $notif = LogModel::where('isAccBidang',2)
+                ->count();
                 $view->with('notif', $notif);
             }
         });
