@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('table_provinsi', function (Blueprint $table) {
             $table->id();
-            $table->integer('code')->nullable();
+            $table->integer('code')->unique();
             $table->string('name')->nullable();
             $table->string('coordinate_x')->nullable();
             $table->string('coordinate_y')->nullable();
