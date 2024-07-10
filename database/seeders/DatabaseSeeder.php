@@ -65,6 +65,12 @@ class DatabaseSeeder extends Seeder
             'divisi_id' => 1
         ]);
         User::factory()->create([
+            'name' => 'Staff Devisi 2',
+            'email' => 'staff2@gmail.com',
+            'role_id' => 1,
+            'divisi_id' => 2
+        ]);
+        User::factory()->create([
             'name' => 'Kepala Devisi 1',
             'email' => 'kepala1@gmail.com',
             'role_id' => 2,
