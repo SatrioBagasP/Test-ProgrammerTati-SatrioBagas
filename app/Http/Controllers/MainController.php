@@ -71,7 +71,7 @@ class MainController extends Controller
     }
     public function update_log($id, Request $request)
     {
-       // Mengambil data logharia yang mau dirubah berdasarkan id
+        // Mengambil data logharia yang mau dirubah berdasarkan id
         $data = LogModel::find($id);
 
         // Mengecek apakah yang dikirm itu acc bidang atau dinas

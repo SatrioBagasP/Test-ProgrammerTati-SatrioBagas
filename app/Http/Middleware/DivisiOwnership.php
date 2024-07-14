@@ -27,11 +27,19 @@ class DivisiOwnership
         $log = LogModel::where('id', $id)->first();
 
 
-        // Ambil ID dosen dari KRS yang diakses
+        // Ambil ID divisi dari Log yang diakses
         $divisiformlog = $log->user->divisi_id;
 
+        // Ambil log statusnya
+        $statusBidang = $log->isAccBidang;
+        $statusDinas = $log->issAccDinas;
+
         if (Auth::user()->role_id == 3) {
-            return $next($request);
+            if ($statusBidang == 2) {
+                return $next($request);
+            } else {
+                return redirect('/logharian')->with('gagal', 'Anda tidak memiliki izin untuk mengakses data ini.');
+            }
         }
         // Jika divisi yang sedang login tidak sama dengan divisi yang berhak mengakses Log
         if ($divisi != $divisiformlog) {
