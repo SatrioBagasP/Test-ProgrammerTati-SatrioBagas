@@ -35,9 +35,12 @@ class DivisiOwnership
         $statusDinas = $log->issAccDinas;
 
         if (Auth::user()->role_id == 3) {
+
+            // Jika Log status bidangnya accept maka ketua divisi bisa mengakses
             if ($statusBidang == 2) {
                 return $next($request);
             } else {
+                // Jika log status bidangnya pending atau pun reject, maka divisi masih belum bisa mengakses
                 return redirect('/logharian')->with('gagal', 'Anda tidak memiliki izin untuk mengakses data ini.');
             }
         }
