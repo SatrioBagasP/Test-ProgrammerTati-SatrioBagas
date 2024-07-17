@@ -366,22 +366,21 @@ class DataController extends Controller
     public function get_data($id = null)
     {
         try {
-
             //Mengambil semua data yang ada di database
             $data = ProvinsiModel::all();
 
             // Melakukan pengecekan apakah yang dikirim memiliki /{id} atau tidak
             if ($id) {
                 // Jika memiliki maka tampilkan data berdasarkan id
-                $data = $data->where('id', $id)->first();
+                $data = ProvinsiModel::findOrFail($id);
             } else {
                 // Jika tidak maka tampilkan semua data
                 $data = $data;
             }
-
-            //Kembalikan respon ke bentok json
+            //Kembalikan data ke bentuk json
             return response()->json($data, 200);
         } catch (Exception $e) {
+            return response()->json(['error'=> $e->getMessage()],500);
         }
     }
 
@@ -389,34 +388,39 @@ class DataController extends Controller
     // Pengupdate an data
     public function update_data($id, Request $request)
     {
+        try{
+            $post = $request->all();
 
-        $post = $request->all();
+            // Mengambil data berdasarkan id yang dikirim
+            $data = ProvinsiModel::where('id', $id)->first();
 
-        // Mengambil data berdasarkan id yang dikirim
-        $data = ProvinsiModel::where('id', $id)->first();
+            // Melakukan perubahan dalam validasi jika code yang dikirim itu code yang sama dengan sebelumnya, hanya mengganti nama saja
+            if ($request->code == $data->code) {
+                // Jika tidak merubah code , dan hanya name maka codenya tidak unique
+                $code = 'required';
+            } else {
+                // Jika merubah code maka code baru harus unique
+                $code = 'unique:table_provinsi';
+            }
 
-        // Melakukan perubahan dalam validasi jika code yang dikirim itu code yang sama dengan sebelumnya, hanya mengganti nama saja
-        if ($request->code == $data->code) {
-            // Jika tidak merubah code , dan hanya name maka codenya tidak unique
-            $code = 'required';
-        } else {
-            // Jika merubah code maka code baru harus unique
-            $code = 'unique:table_provinsi';
+            // Melakukan validasi
+            $validated = $request->validate([
+                'name' => 'string',
+                'code' => $code,
+                'coordinate_x' => 'string',
+                'coordinate_y' => 'string',
+                'google_place_id' => 'string'
+            ]);
+
+            // Melakukan update
+            $data->update($validated);
+
+            return response()->json($data, 200);
+        }catch (Exception $e)
+        {
+            return response()->json(['error'=> $e->getMessage()],500);
         }
 
-        // Melakukan validasi
-        $validated = $request->validate([
-            'name' => 'string',
-            'code' => $code,
-            'coordinate_x' => 'string',
-            'coordinate_y' => 'string',
-            'google_place_id' => 'string'
-        ]);
-
-        // Melakukan update
-        $data->update($validated);
-
-        return response()->json($data, 200);
     }
 
     // Penambahan Data
@@ -454,10 +458,12 @@ class DataController extends Controller
                 return response()->json("Data Berhasil di Hapus", 200);
             }
             // Jika data tidak ada maka tidak melakukan penghapusan
-            else {
-                return response()->json("Data Tidak ada", 400);
-            }
+            // else {
+            //     return response()->json("Data Tidak ada", 400);
+            // }
         } catch (Exception $e) {
+            return response()->json(['error'=> $e->getMessage()],500);
         }
+
     }
 }
