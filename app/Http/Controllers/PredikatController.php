@@ -11,6 +11,8 @@ class PredikatController extends Controller
     {
         if($request->isMethod('post'))
         {
+
+            // Mendifinisikan Matriks
             $nilai = [
                 '1a' => 'Sangat Kurang',
                 '2a' => 'Kurang / Missconduct',
@@ -23,20 +25,30 @@ class PredikatController extends Controller
                 '3c' => 'Sangat Baik'
             ];
 
+            //Mengambil request dari form
             $validated = $request->validate([
                 'perilaku' => 'required',
                 'hasil_kerja' => 'required',
             ]);
 
+
+            // Menggabungkan hasil kerja dan perilaku
             $hasil = $validated['hasil_kerja'].$validated['perilaku'];
+
+            // Mengecek apakah variabel hasil ada pada array nilai
             if (array_key_exists($hasil, $nilai)) {
+
+                // Jika ada maka variabel hasil yang baru nilainya diambil dari array dengan index variable hasil penggabungan inputan form
                 $hasil = $nilai[$hasil];
             }
         }
+
+        // Jika variable hasil ada maka tampilkan hasil
         if($hasil != null)
         {
             $hasil;
         }
+        // Jika tidak ada maka null
         else
         {
             $hasil = '';
